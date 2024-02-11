@@ -39,7 +39,7 @@ class CounterTest(TestCase):
         self.assertEqual(result.status_code, status.HTTP_409_CONFLICT)
 
     def test_update_a_counter(self):
-        """ It should update the counter by 1 when a PUT request is made. """
+        """ It should update the counter by 1 when a PUT request is made """
 
         # Post a new counter called 'jordan'
         name = 'jordan'
@@ -69,3 +69,19 @@ class CounterTest(TestCase):
         retrieved_counter = result.get_json()
 
         self.assertEqual(counter, retrieved_counter)
+
+    def test_delete_a_counter(self):
+        """ It should delete the specified counter """
+
+        # Create a new counter called 'marks
+        name = 'marks'
+        result = self.client.post(f'/counters/{name}')
+        self.assertEqual(result.status_code, status.HTTP_201_CREATED)
+
+        # Delete the newly created counter.
+        result = self.client.delete(f'/counters/{name}')
+        self.assertEqual(result.status_code, status.HTTP_204_NO_CONTENT)
+
+        # Ensure the counter was actually deleted.
+        result = self.client.get(f'/counters/{name}')
+        self.assertEqual(result.status_code, status.HTTP_404_NOT_FOUND)
