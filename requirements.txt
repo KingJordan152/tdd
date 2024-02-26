@@ -5,3 +5,7 @@ pinocchio
 coverage
 pylint
 flake8
+safety
+black
+phinx
+snyk
