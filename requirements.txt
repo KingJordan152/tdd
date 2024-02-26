@@ -7,5 +7,5 @@ pylint
 flake8
 safety
 black
-phinx
+sphinx
 snyk
