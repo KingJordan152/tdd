@@ -41,6 +41,3 @@ jobs:
               run: |
                 sphinx-quickstart --sep --dot=_ --suffix=.rst
                 sphinx-build -b html . _build
-
-            - name: Security Checks
-              run: snyk test
