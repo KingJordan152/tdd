@@ -11,7 +11,8 @@ COUNTERS = {}
 # let Flask know that the only methods that is allowed to called
 # on this function is "POST".
 
-@app.route('/counters/<name>', methods=['POST'])
+
+@app.route("/counters/<name>", methods=["POST"])
 def create_counter(name):
     """Create a counter"""
     app.logger.info(f"Request to create counter: {name}")
@@ -24,17 +25,17 @@ def create_counter(name):
     return {name: COUNTERS[name]}, status.HTTP_201_CREATED
 
 
-@app.route('/counters/<name>', methods=['PUT'])
+@app.route("/counters/<name>", methods=["PUT"])
 def update_counter(name):
-    """ Update a counter """
+    """Update a counter"""
     app.logger.info(f"Request to update counter: {name}")
     COUNTERS[name] += 1
     return {name: COUNTERS[name]}, status.HTTP_200_OK
 
 
-@app.route('/counters/<name>', methods=['GET'])
+@app.route("/counters/<name>", methods=["GET"])
 def get_counter(name):
-    """ Get a counter """
+    """Get a counter"""
     app.logger.info(f"Request to get counter: {name}")
 
     if name not in COUNTERS:
@@ -43,13 +44,15 @@ def get_counter(name):
     return {name: COUNTERS[name]}, status.HTTP_200_OK
 
 
-@app.route('/counters/<name>', methods=['DELETE'])
+@app.route("/counters/<name>", methods=["DELETE"])
 def delete_counter(name):
-    """ Delete a counter """
-    app.logger.info(f'Request to delete counter: {name}')
+    """Delete a counter"""
+    app.logger.info(f"Request to delete counter: {name}")
 
     if name not in COUNTERS:
         return {"Message": f"Counter {name} does not exist"}, status.HTTP_404_NOT_FOUND
 
     del COUNTERS[name]
-    return {"Message": f"Counter {name} successfully deleted"}, status.HTTP_204_NO_CONTENT
+    return {
+        "Message": f"Counter {name} successfully deleted"
+    }, status.HTTP_204_NO_CONTENT
